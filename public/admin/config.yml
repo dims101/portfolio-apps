@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: your-github-username/your-repo-name # Sesuaikan dengan username dan nama repo GitHub Anda
+  repo: dims101/portfolio-apps
   branch: main
 
 media_folder: "public/uploads"
