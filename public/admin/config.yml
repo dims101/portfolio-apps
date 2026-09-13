@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: your-github-username/your-repo-name # Sesuaikan dengan username dan nama repo GitHub Anda
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "apps"
+    label: "Daftar Aplikasi"
+    label_singular: "Aplikasi"
+    folder: "src/content/apps"
+    extension: "json"
+    format: "json"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{tech_stack}})"
+    fields:
+      - { label: "Judul Aplikasi", name: "title", widget: "string" }
+      - { label: "Deskripsi", name: "description", widget: "text" }
+      - { label: "Tech Stack (Pisahkan Koma)", name: "tech_stack", widget: "string", hint: "Contoh: React, Tailwind CSS, Docker" }
+      - { label: "Screenshot / Gambar", name: "image", widget: "image" }
+      - { label: "Link Live (Sudah Di-host)", name: "live_link", widget: "string", required: false, hint: "Kosongkan jika aplikasi belum di-host" }
+      - { label: "Link Source Code / GitHub", name: "github_link", widget: "string", required: false }
