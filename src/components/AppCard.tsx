@@ -1,4 +1,4 @@
-import { ExternalLink, Key, Images, Lock, Globe } from 'lucide-react';
+import { ExternalLink, Images, Lock, Globe } from 'lucide-react';
 import type { AppItem } from '../utils/fetchApps';
 
 export interface AppCardProps {
@@ -89,22 +89,15 @@ export default function AppCard({ app, onOpenGallery }: AppCardProps) {
           </span>
         </div>
 
-        {/* Top Badges (Multi-photo badge & Live badge) */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5">
-          {photoCount > 1 && (
+        {/* Top Badges (Multi-photo badge) */}
+        {photoCount > 1 && (
+          <div className="absolute top-3 left-3 flex items-center gap-1.5">
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-zinc-900/80 text-zinc-100 backdrop-blur-md shadow-xs border border-white/10">
               <Images className="w-3 h-3 text-emerald-400" />
               <span>{photoCount} Foto</span>
             </span>
-          )}
-
-          {hasLoginInfo && (
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold bg-emerald-950/80 text-emerald-300 backdrop-blur-md border border-emerald-500/30">
-              <Key className="w-3 h-3" />
-              <span>Info Login</span>
-            </span>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="absolute top-3 right-3">
           {isLive ? (

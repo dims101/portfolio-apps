@@ -409,7 +409,7 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
             </div>
           )}
 
-          {/* Tech Stack & Action Links (Source Code berdampingan dengan Buka Aplikasi Demo) */}
+          {/* Tech Stack & Action Links (Source Code berdampingan dengan Buka Aplikasi) */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-zinc-200/70 flex-shrink-0">
             <div className="flex flex-wrap gap-1.5">
               {app.tech_stack.split(',').map((tech, i) => (
@@ -439,7 +439,7 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-900 hover:bg-zinc-800 text-white transition-colors shadow-sm inline-flex items-center gap-1.5"
                 >
-                  <span>Buka Aplikasi Demo</span>
+                  <span>Buka Aplikasi</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}
