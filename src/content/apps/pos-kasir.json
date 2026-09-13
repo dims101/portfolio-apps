@@ -1,8 +1,0 @@
-{
-  "title": "SmartPOS — Sistem Kasir Modern",
-  "description": "Aplikasi point-of-sale berbasis web dengan manajemen stok barang otomatis, cetak struk thermal via bluetooth/USB, dan laporan laba-rugi harian.",
-  "tech_stack": "React, TypeScript, Tailwind CSS, SQLite",
-  "image": "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1000&q=80",
-  "live_link": "https://demo.example.com/pos",
-  "github_link": "https://github.com/example/smart-pos"
-}
