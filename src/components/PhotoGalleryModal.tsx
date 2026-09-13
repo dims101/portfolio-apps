@@ -135,7 +135,7 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
   if (!app) return null;
 
   const currentPhoto = photos[currentIndex] || { image: app.image, title: app.title };
-  const hasLoginInfo = Boolean(app.demo_username || app.demo_password);
+  const hasLoginInfo = Boolean(app.demo_username || app.demo_password || app.login_link);
   const hasAnyLink = Boolean(app.live_link || app.github_link);
 
   return (
@@ -388,6 +388,24 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
                   </div>
                 )}
               </div>
+
+              {/* Quick Login Link Button if provided */}
+              {app.login_link && (
+                <div className="pt-2 flex items-center justify-between border-t border-emerald-200/60 mt-2">
+                  <span className="text-xs text-emerald-900 font-medium">
+                    Halaman form otentikasi login:
+                  </span>
+                  <a
+                    href={app.login_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors shadow-2xs"
+                  >
+                    <span>Buka Halaman Login</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              )}
             </div>
           )}
 

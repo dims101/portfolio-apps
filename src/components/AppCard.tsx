@@ -30,6 +30,7 @@ export default function AppCard({ app, onOpenGallery }: AppCardProps) {
     tech_stack,
     image,
     live_link,
+    login_link,
     github_link,
     demo_username,
     demo_password,
@@ -45,7 +46,7 @@ export default function AppCard({ app, onOpenGallery }: AppCardProps) {
 
   const isLive = Boolean(live_link && live_link.trim().length > 0);
   const hasGithub = Boolean(github_link && github_link.trim().length > 0);
-  const hasLoginInfo = Boolean(demo_username || demo_password);
+  const hasLoginInfo = Boolean(demo_username || demo_password || login_link);
   const photoCount = gallery && gallery.length > 0 ? gallery.length : 1;
 
   const handleCardClick = () => {

@@ -11,6 +11,7 @@ export interface AppItem {
   tech_stack: string;
   image: string;
   live_link?: string;
+  login_link?: string;
   github_link?: string;
   demo_username?: string;
   demo_password?: string;

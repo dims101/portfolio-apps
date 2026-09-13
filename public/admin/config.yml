@@ -22,6 +22,7 @@ collections:
       - { label: "Tech Stack (Pisahkan Koma)", name: "tech_stack", widget: "string", hint: "Contoh: React, Tailwind CSS, Docker" }
       - { label: "Screenshot / Gambar", name: "image", widget: "image" }
       - { label: "Link Live (Sudah Di-host)", name: "live_link", widget: "string", required: false, hint: "Kosongkan jika aplikasi belum di-host" }
+      - { label: "Link Halaman Login", name: "login_link", widget: "string", required: false, hint: "URL khusus halaman login aplikasi (misal: https://demo.app/login)" }
       - { label: "Link Source Code / GitHub", name: "github_link", widget: "string", required: false }
       - { label: "Demo Username / Email", name: "demo_username", widget: "string", required: false, hint: "Username atau email akun demo (jika ada)" }
       - { label: "Demo Password", name: "demo_password", widget: "string", required: false, hint: "Password akun demo (jika ada)" }

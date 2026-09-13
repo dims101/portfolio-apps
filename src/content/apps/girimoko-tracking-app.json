@@ -4,5 +4,10 @@
   "tech_stack": "Laravel, MySQL, Bootstrap",
   "image": "/uploads/Dashboard General.png",
   "live_link": "https://girimoko.dims-dev.my.id",
-  "github_link": "https://github.com/dims101/girimoko_app"
+  "login_link": "https://girimoko.dims-dev.my.id/login",
+  "github_link": "https://github.com/dims101/girimoko_app",
+  "demo_username": "admin",
+  "demo_password": "password123",
+  "demo_note": "Akses Akun Demo",
+  "gallery": []
 }

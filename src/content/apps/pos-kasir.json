@@ -4,6 +4,7 @@
   "tech_stack": "React, TypeScript, Tailwind CSS, SQLite",
   "image": "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=80",
   "live_link": "https://demo.example.com/pos",
+  "login_link": "https://demo.example.com/pos/login",
   "github_link": "https://github.com/example/smart-pos",
   "demo_username": "kasir@demo.com",
   "demo_password": "kasir123",
