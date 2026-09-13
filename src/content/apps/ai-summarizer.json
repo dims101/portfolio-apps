@@ -1,0 +1,8 @@
+{
+  "title": "DocuAI — Dokumen Reader & Ringkas AI",
+  "description": "Aplikasi pembaca PDF pintar yang mampu mengekstrak informasi dan membuat intisari dokumen ratusan halaman dalam hitungan detik.",
+  "tech_stack": "React, Python FastAPI, LangChain, Tailwind CSS",
+  "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80",
+  "live_link": "https://docu-ai.example.com",
+  "github_link": ""
+}

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import AppCard from './AppCard.tsx';
+import AppCard from './AppCard';
 
 describe('AppCard Component', () => {
   it('renders application title, description, and tech stack tags', () => {
