@@ -1,0 +1,20 @@
+{
+  "title": "AuraHome — IoT Smart Monitoring Dashboard",
+  "description": "Dashboard telemetri IoT real-time untuk pemantauan konsumsi daya listrik, kelembapan suhu ruangan, dan otomatisasi saklar relay cerdas.",
+  "tech_stack": "React, MQTT, Node.js, InfluxDB, Tailwind CSS, Chart.js",
+  "image": "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80",
+  "live_link": "",
+  "github_link": "https://github.com/dims101/aurahome-iot",
+  "gallery": [
+    {
+      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80",
+      "title": "Kontrol Saklar & Perangkat Rumah",
+      "description": "Panel kontrol relay lampu, suhu AC, dan otomatisasi skenario jadwal harian."
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+      "title": "Grafik Beban Listrik kWh Real-Time",
+      "description": "Visualisasi konsumsi daya listrik per ruangan dengan kalkulasi estimasi tagihan bulanan."
+    }
+  ]
+}

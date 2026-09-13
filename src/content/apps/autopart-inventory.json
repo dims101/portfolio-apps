@@ -1,0 +1,20 @@
+{
+  "title": "AutoPart — Manajemen Gudang Bengkel & Suku Cadang",
+  "description": "Sistem inventaris suku cadang otomotif dengan penomoran rak bin-location, peringatan reorder point otomatis, dan riwayat kartu mutasi barang.",
+  "tech_stack": "React, Tailwind CSS, Supabase, PostgreSQL",
+  "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80",
+  "live_link": "",
+  "github_link": "",
+  "gallery": [
+    {
+      "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80",
+      "title": "Katalog Sparepart & Posisi Rak Gudang",
+      "description": "Pencarian suku cadang berdasarkan nomor seri pabrikan (OEM) dan lokasi lorong rak."
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+      "title": "Kartu Stok & Laporan Mutasi Fisik",
+      "description": "Audit selisih stok (stock opname) periodik dan riwayat pengeluaran barang ke teknisi bengkel."
+    }
+  ]
+}

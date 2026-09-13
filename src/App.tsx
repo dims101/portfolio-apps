@@ -1,16 +1,38 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import AppCard from './components/AppCard';
-import { getApps } from './utils/fetchApps';
+import { PhotoGalleryModal } from './components/PhotoGalleryModal';
+import { getApps, type AppItem } from './utils/fetchApps';
 import {
   Layers,
   Search,
-  Lock,
 } from 'lucide-react';
 
 export default function App() {
   const allApps = useMemo(() => getApps(), []);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'live' | 'offline'>('all');
+  const [selectedAppForGallery, setSelectedAppForGallery] = useState<AppItem | null>(null);
+
+  // Secret admin shortcut: triple click on brand logo
+  const clickTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clickCountRef = useRef(0);
+
+  const handleBrandTripleClick = () => {
+    clickCountRef.current += 1;
+    if (clickTimeoutRef.current) {
+      clearTimeout(clickTimeoutRef.current);
+    }
+
+    if (clickCountRef.current >= 3) {
+      clickCountRef.current = 0;
+      window.location.href = '/admin/index.html';
+      return;
+    }
+
+    clickTimeoutRef.current = setTimeout(() => {
+      clickCountRef.current = 0;
+    }, 1000);
+  };
 
   const filteredApps = useMemo(() => {
     return allApps.filter((app) => {
@@ -32,85 +54,79 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-zinc-50/70 text-zinc-900">
-      {/* Top Minimalist Header */}
+      {/* Top Header */}
       <header className="sticky top-0 z-40 backdrop-blur-md bg-white/80 border-b border-zinc-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-bold text-sm shadow-xs">
+          <div
+            onClick={handleBrandTripleClick}
+            className="flex items-center gap-3 cursor-pointer select-none group"
+            title="Dims Dev"
+          >
+            <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-bold text-sm shadow-xs transition-transform duration-200 group-hover:scale-105 active:scale-95">
               <Layers className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="font-bold text-base tracking-tight text-zinc-900">
-                Aplikasi & Portofolio
+              <h1 className="font-bold text-base tracking-tight text-zinc-900 group-hover:text-emerald-700 transition-colors">
+                Dims Dev
               </h1>
               <p className="text-xs text-zinc-500 hidden sm:block">
-                Katalog aplikasi web, tools, dan proyek produksi
+                Katalog portofolio aplikasi dan proyek software saya
               </p>
             </div>
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* CMS Admin Link */}
-            <a
-              href="/admin/index.html"
-              title="Buka Sveltia CMS Admin"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200 text-zinc-800 transition-colors border border-zinc-200"
-            >
-              <Lock className="w-3.5 h-3.5 text-zinc-500" />
-              <span>Admin CMS</span>
-            </a>
           </div>
         </div>
       </header>
 
       {/* Main Apps Showcase Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Search & Filter Toolbar */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between pb-8 border-b border-zinc-200/80">
-          {/* Search Input */}
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Cari berdasarkan nama, deskripsi, atau tech stack..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-white border border-zinc-200 focus:outline-hidden focus:ring-2 focus:ring-zinc-900 focus:border-transparent transition-all shadow-2xs"
-            />
-          </div>
+        {/* Sticky Floating Search & Filter Toolbar */}
+        <div className="sticky top-16 z-30 bg-zinc-50/95 backdrop-blur-md py-3.5 border-b border-zinc-200/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-4 transition-all">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-between">
+            {/* Search Input */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Cari berdasarkan nama, deskripsi, atau tech stack..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-white border border-zinc-200 focus:outline-hidden focus:ring-2 focus:ring-zinc-900 focus:border-transparent transition-all shadow-2xs"
+              />
+            </div>
 
-          {/* Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
-            <button
-              onClick={() => setFilterType('all')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                filterType === 'all'
-                  ? 'bg-zinc-900 text-white shadow-xs'
-                  : 'bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-100'
-              }`}
-            >
-              Semua ({allApps.length})
-            </button>
-            <button
-              onClick={() => setFilterType('live')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                filterType === 'live'
-                  ? 'bg-zinc-900 text-white shadow-xs'
-                  : 'bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-100'
-              }`}
-            >
-              Live Demo ({liveCount})
-            </button>
-            <button
-              onClick={() => setFilterType('offline')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                filterType === 'offline'
-                  ? 'bg-zinc-900 text-white shadow-xs'
-                  : 'bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-100'
-              }`}
-            >
-              Lokal / Screenshot ({allApps.length - liveCount})
-            </button>
+            {/* Filter Pills */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              <button
+                onClick={() => setFilterType('all')}
+                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                  filterType === 'all'
+                    ? 'bg-zinc-900 text-white shadow-xs'
+                    : 'bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-100'
+                }`}
+              >
+                Semua ({allApps.length})
+              </button>
+              <button
+                onClick={() => setFilterType('live')}
+                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                  filterType === 'live'
+                    ? 'bg-zinc-900 text-white shadow-xs'
+                    : 'bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-100'
+                }`}
+              >
+                Live Demo ({liveCount})
+              </button>
+              <button
+                onClick={() => setFilterType('offline')}
+                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                  filterType === 'offline'
+                    ? 'bg-zinc-900 text-white shadow-xs'
+                    : 'bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-100'
+                }`}
+              >
+                Lokal / Screenshot ({allApps.length - liveCount})
+              </button>
+            </div>
           </div>
         </div>
 
@@ -135,12 +151,8 @@ export default function App() {
             {filteredApps.map((app, index) => (
               <AppCard
                 key={`${app.title}-${index}`}
-                title={app.title}
-                description={app.description}
-                techStack={app.tech_stack}
-                image={app.image}
-                liveLink={app.live_link}
-                githubLink={app.github_link}
+                app={app}
+                onOpenGallery={(clickedApp) => setSelectedAppForGallery(clickedApp)}
               />
             ))}
           </div>
@@ -159,17 +171,16 @@ export default function App() {
         )}
       </main>
 
-      {/* Minimal Footer */}
-      <footer className="border-t border-zinc-200/80 bg-white mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <p>© {new Date().getFullYear()} Katalog Aplikasi</p>
+      {/* Photo Gallery & Detail Lightbox Modal */}
+      <PhotoGalleryModal
+        app={selectedAppForGallery}
+        onClose={() => setSelectedAppForGallery(null)}
+      />
 
-          <p className="text-center">
-            Daftar aplikasi dapat diperbarui via{' '}
-            <a href="/admin/index.html" className="font-semibold text-zinc-800 underline hover:text-black">
-              Sveltia CMS
-            </a>
-          </p>
+      {/* Minimal Clean Footer */}
+      <footer className="border-t border-zinc-200/80 bg-white mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-end text-xs text-zinc-500">
+          <p>© {new Date().getFullYear()} Dims Dev</p>
         </div>
       </footer>
     </div>

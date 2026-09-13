@@ -1,0 +1,23 @@
+{
+  "title": "KaryaSync — HRIS & Presensi Karyawan GPS",
+  "description": "Aplikasi absensi mobile-friendly dengan deteksi fake GPS, pengajuan cuti berjenjang, klaim reimburse, dan slip gaji digital otomatis.",
+  "tech_stack": "Laravel, Livewire, Alpine.js, Tailwind CSS, MySQL",
+  "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+  "live_link": "https://karyasync.demo.app",
+  "github_link": "",
+  "demo_username": "hr.manager@karyasync.com",
+  "demo_password": "hrisPass2026",
+  "demo_note": "Role: HR Administrator",
+  "gallery": [
+    {
+      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+      "title": "Monitoring Kehadiran & Rekap Jam Kerja",
+      "description": "Dashboard real-time staf yang hadir, izin, atau bertugas dinas luar kota."
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80",
+      "title": "Kalkulator Payroll & Komponen Potongan BPJS",
+      "description": "Penghitungan gaji otomatis meliputi tunjangan makan, lembur, dan pajak PPh 21."
+    }
+  ]
+}

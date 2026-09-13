@@ -23,3 +23,15 @@ collections:
       - { label: "Screenshot / Gambar", name: "image", widget: "image" }
       - { label: "Link Live (Sudah Di-host)", name: "live_link", widget: "string", required: false, hint: "Kosongkan jika aplikasi belum di-host" }
       - { label: "Link Source Code / GitHub", name: "github_link", widget: "string", required: false }
+      - { label: "Demo Username / Email", name: "demo_username", widget: "string", required: false, hint: "Username atau email akun demo (jika ada)" }
+      - { label: "Demo Password", name: "demo_password", widget: "string", required: false, hint: "Password akun demo (jika ada)" }
+      - { label: "Catatan Demo", name: "demo_note", widget: "string", required: false, hint: "Contoh: Role Admin, Mode Kasir, Read-only" }
+      - label: "Galeri Foto (Bisa Lebih Dari 1)"
+        name: "gallery"
+        widget: "list"
+        required: false
+        summary: "{{fields.title}} - {{fields.image}}"
+        fields:
+          - { label: "Foto / Tangkapan Layar", name: "image", widget: "image" }
+          - { label: "Judul Foto (Opsional)", name: "title", widget: "string", required: false }
+          - { label: "Deskripsi Foto (Opsional)", name: "description", widget: "text", required: false }
