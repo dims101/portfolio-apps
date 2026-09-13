@@ -4,7 +4,6 @@ import { getApps } from './utils/fetchApps';
 import {
   Layers,
   Search,
-  Server,
   Lock,
 } from 'lucide-react';
 
@@ -51,11 +50,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Status indicator */}
-            <div className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/60">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Self-Hosted di Coolify</span>
-            </div>
+            {/* CMS Admin Link */}
 
             {/* CMS Admin Link */}
             <a
@@ -169,10 +164,7 @@ export default function App() {
       {/* Minimal Footer */}
       <footer className="border-t border-zinc-200/80 bg-white mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <div className="flex items-center gap-2">
-            <Server className="w-4 h-4 text-zinc-400" />
-            <span>Di-host mandiri dengan Coolify & Vite</span>
-          </div>
+          <p>© {new Date().getFullYear()} Katalog Aplikasi</p>
 
           <p className="text-center">
             Daftar aplikasi dapat diperbarui secara dinamis via{' '}
