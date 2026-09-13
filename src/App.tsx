@@ -5,30 +5,12 @@ import {
   Layers,
   Search,
   Lock,
-  Plus,
-  X,
-  Download,
-  Copy,
-  Check,
-  FolderOpen,
 } from 'lucide-react';
 
 export default function App() {
   const allApps = useMemo(() => getApps(), []);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'live' | 'offline'>('all');
-
-  // Modal State for Adding Application
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [newApp, setNewApp] = useState({
-    title: '',
-    description: '',
-    tech_stack: '',
-    image: '',
-    live_link: '',
-    github_link: '',
-  });
 
   const filteredApps = useMemo(() => {
     return allApps.filter((app) => {
@@ -47,35 +29,6 @@ export default function App() {
   }, [allApps, searchQuery, filterType]);
 
   const liveCount = allApps.filter((a) => a.live_link && a.live_link.trim().length > 0).length;
-
-  // Helper to handle JSON file download
-  const handleDownloadJSON = () => {
-    if (!newApp.title) {
-      alert('Mohon masukkan judul aplikasi terlebih dahulu.');
-      return;
-    }
-
-    const filename = `${newApp.title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '') || 'aplikasi-baru'}.json`;
-
-    const jsonString = JSON.stringify(newApp, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handleCopyJSON = () => {
-    const jsonString = JSON.stringify(newApp, null, 2);
-    navigator.clipboard.writeText(jsonString);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-zinc-50/70 text-zinc-900">
@@ -97,15 +50,6 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Quick Add Button */}
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 text-white hover:bg-zinc-800 transition-colors shadow-xs"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Tambah Aplikasi</span>
-            </button>
-
             {/* CMS Admin Link */}
             <a
               href="/admin/index.html"
@@ -228,149 +172,6 @@ export default function App() {
           </p>
         </div>
       </footer>
-
-      {/* Modal Form Tambah Aplikasi */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="bg-white border border-zinc-200 rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white flex items-center justify-center">
-                  <Plus className="w-4 h-4" />
-                </div>
-                <div>
-                  <h2 className="text-base font-bold text-zinc-900">Tambah Aplikasi Baru</h2>
-                  <p className="text-xs text-zinc-500">Isi data aplikasi portofolio Anda</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg hover:bg-zinc-100 text-zinc-400 hover:text-zinc-600 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleDownloadJSON();
-              }}
-              className="mt-4 space-y-4 text-xs"
-            >
-              <div>
-                <label className="block font-semibold text-zinc-700 mb-1">Judul Aplikasi *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Contoh: Smart POS System"
-                  value={newApp.title}
-                  onChange={(e) => setNewApp({ ...newApp, title: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-zinc-200 text-sm focus:outline-hidden focus:ring-2 focus:ring-zinc-900"
-                />
-              </div>
-
-              <div>
-                <label className="block font-semibold text-zinc-700 mb-1">Deskripsi Singkat *</label>
-                <textarea
-                  required
-                  rows={3}
-                  placeholder="Jelaskan fungsi aplikasi dan masalah apa yang diselesaikan..."
-                  value={newApp.description}
-                  onChange={(e) => setNewApp({ ...newApp, description: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-zinc-200 text-sm focus:outline-hidden focus:ring-2 focus:ring-zinc-900"
-                />
-              </div>
-
-              <div>
-                <label className="block font-semibold text-zinc-700 mb-1">Tech Stack (Pisahkan Koma) *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Contoh: React, TypeScript, Tailwind CSS, SQLite"
-                  value={newApp.tech_stack}
-                  onChange={(e) => setNewApp({ ...newApp, tech_stack: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-zinc-200 text-sm focus:outline-hidden focus:ring-2 focus:ring-zinc-900"
-                />
-              </div>
-
-              <div>
-                <label className="block font-semibold text-zinc-700 mb-1">URL Screenshot / Gambar *</label>
-                <input
-                  type="url"
-                  required
-                  placeholder="https://images.unsplash.com/... atau /uploads/gambar.png"
-                  value={newApp.image}
-                  onChange={(e) => setNewApp({ ...newApp, image: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-zinc-200 text-sm focus:outline-hidden focus:ring-2 focus:ring-zinc-900"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-semibold text-zinc-700 mb-1">
-                    Link Live Demo <span className="font-normal text-zinc-400">(Opsional)</span>
-                  </label>
-                  <input
-                    type="url"
-                    placeholder="https://aplikasianda.com"
-                    value={newApp.live_link}
-                    onChange={(e) => setNewApp({ ...newApp, live_link: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg border border-zinc-200 text-sm focus:outline-hidden focus:ring-2 focus:ring-zinc-900"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-zinc-700 mb-1">
-                    Link GitHub <span className="font-normal text-zinc-400">(Opsional)</span>
-                  </label>
-                  <input
-                    type="url"
-                    placeholder="https://github.com/..."
-                    value={newApp.github_link}
-                    onChange={(e) => setNewApp({ ...newApp, github_link: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg border border-zinc-200 text-sm focus:outline-hidden focus:ring-2 focus:ring-zinc-900"
-                  />
-                </div>
-              </div>
-
-              <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-xl space-y-1 text-zinc-600">
-                <div className="flex items-center gap-1.5 font-semibold text-zinc-800">
-                  <FolderOpen className="w-4 h-4 text-zinc-500" />
-                  <span>Petunjuk Penyimpanan:</span>
-                </div>
-                <p className="text-[11px] leading-relaxed">
-                  Unduh file <code>.json</code> ini dan letakkan di folder:
-                  <br />
-                  <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-zinc-200 inline-block mt-1">
-                    src/content/apps/
-                  </span>
-                  <br />
-                  Aplikasi akan langsung muncul otomatis di portofolio Anda!
-                </p>
-              </div>
-
-              <div className="flex gap-2 pt-2">
-                <button
-                  type="submit"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-zinc-900 text-white hover:bg-zinc-800 transition-colors shadow-xs"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download File JSON</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCopyJSON}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border border-zinc-200 hover:bg-zinc-100 transition-colors"
-                >
-                  {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
-                  <span>{copied ? 'Tersalin!' : 'Salin JSON'}</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
