@@ -1,0 +1,8 @@
+{
+  "title": "Girimoko Tracking App",
+  "description": "Sistem informasi logistik dan pelacakan pengiriman kargo terintegrasi. Memfasilitasi pencarian real-time nomor resi (AWB) dan proforma invoice, dilengkapi ringkasan persentase performa pengiriman antar depo distribusi.",
+  "tech_stack": "Laravel, MySQL, Bootstrap",
+  "image": "/uploads/Dashboard General.png",
+  "live_link": "https://girimoko.dims-dev.my.id",
+  "github_link": "https://github.com/dims101/girimoko_app"
+}
