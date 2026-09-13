@@ -24,6 +24,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy custom Nginx configuration with SPA routing support
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
+# Support both port 80 and port 3000
+EXPOSE 80 3000
 
 CMD ["nginx", "-g", "daemon off;"]
