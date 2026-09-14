@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback, type FC, type TouchEvent } from 'react';
-import { ExternalLink, Check, Copy, ChevronLeft, ChevronRight, X, ImageOff, Lock } from 'lucide-react';
+import { ExternalLink, Check, Copy, ChevronLeft, ChevronRight, X, ImageOff, Lock, Maximize2, Minimize2 } from 'lucide-react';
 import type { AppItem, GalleryPhoto } from '../utils/fetchApps';
 
 interface PhotoGalleryModalProps {
@@ -32,6 +32,7 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
   const [failedImages, setFailedImages] = useState<Record<number, boolean>>({});
   const [isClosing, setIsClosing] = useState(false);
   const [isRendered, setIsRendered] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Normalisasi daftar foto dari app.gallery atau app.image
   const photos: GalleryPhoto[] = useMemo(() => {
@@ -49,6 +50,7 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
   useEffect(() => {
     if (app) {
       setIsClosing(false);
+      setIsFullscreen(false);
       setFailedImages({});
       setCurrentIndex(0);
       setCopiedUser(false);
@@ -58,11 +60,13 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
       });
     } else {
       setIsRendered(false);
+      setIsFullscreen(false);
     }
   }, [app]);
 
   // Smooth Zoom-Out when closing
   const handleSafeClose = useCallback(() => {
+    setIsFullscreen(false);
     setIsClosing(true);
     setTimeout(() => {
       onClose();
@@ -87,7 +91,11 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        handleSafeClose();
+        if (isFullscreen) {
+          setIsFullscreen(false);
+        } else {
+          handleSafeClose();
+        }
       } else if (e.key === 'ArrowRight') {
         handleNext();
       } else if (e.key === 'ArrowLeft') {
@@ -97,7 +105,7 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [app, handleSafeClose, handleNext, handlePrev]);
+  }, [app, isFullscreen, handleSafeClose, handleNext, handlePrev]);
 
   // Touch swipe handling for mobile
   const handleTouchStart = (e: TouchEvent) => {
@@ -183,8 +191,14 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
           <div className="relative group bg-zinc-100/90 rounded-xl border border-zinc-200/80 overflow-hidden h-[350px] sm:h-[390px] w-full flex-shrink-0">
             {/* Sliding Track */}
             <div
-              className="flex h-full w-full transition-transform duration-300 ease-in-out"
+              className={`flex h-full w-full transition-transform duration-300 ease-in-out ${!failedImages[currentIndex] ? 'cursor-zoom-in' : ''}`}
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              onClick={() => {
+                if (!failedImages[currentIndex]) {
+                  setIsFullscreen(true);
+                }
+              }}
+              title="Klik gambar untuk melihat layar penuh (fullscreen)"
             >
               {photos.map((photoItem, idx) => (
                 <div
@@ -213,22 +227,45 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
               ))}
             </div>
 
+            {/* Tombol Full Screen */}
+            {!failedImages[currentIndex] && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsFullscreen(true);
+                }}
+                title="Lihat Layar Penuh (Fullscreen)"
+                aria-label="Lihat Layar Penuh"
+                className="absolute top-3 right-3 z-10 p-2 rounded-lg bg-zinc-900/75 hover:bg-zinc-900 text-white backdrop-blur-md border border-white/20 transition-all active:scale-95 shadow-md flex items-center gap-1.5 text-xs font-medium"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Layar Penuh</span>
+              </button>
+            )}
+
             {/* Carousel Navigation Arrows */}
             {photos.length > 1 && (
               <>
                 <button
                   type="button"
-                  onClick={handlePrev}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrev();
+                  }}
                   aria-label="Foto sebelumnya"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/90 hover:bg-white text-zinc-800 shadow-md border border-zinc-200/80 transition-transform active:scale-90 focus:outline-none focus:ring-2 focus:ring-zinc-800"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/90 hover:bg-white text-zinc-800 shadow-md border border-zinc-200/80 transition-transform active:scale-90 focus:outline-none focus:ring-2 focus:ring-zinc-800 z-10"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   type="button"
-                  onClick={handleNext}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNext();
+                  }}
                   aria-label="Foto selanjutnya"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/90 hover:bg-white text-zinc-800 shadow-md border border-zinc-200/80 transition-transform active:scale-90 focus:outline-none focus:ring-2 focus:ring-zinc-800"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/90 hover:bg-white text-zinc-800 shadow-md border border-zinc-200/80 transition-transform active:scale-90 focus:outline-none focus:ring-2 focus:ring-zinc-800 z-10"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -237,7 +274,7 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
 
             {/* Photo Counter Badge */}
             {photos.length > 1 && (
-              <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-white/90 backdrop-blur-md text-[11px] font-semibold text-zinc-700 border border-zinc-200 shadow-xs">
+              <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-white/90 backdrop-blur-md text-[11px] font-semibold text-zinc-700 border border-zinc-200 shadow-xs z-10">
                 {currentIndex + 1} / {photos.length}
               </div>
             )}
@@ -448,6 +485,112 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Image Lightbox Overlay */}
+      {isFullscreen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-lg flex flex-col justify-between p-3 sm:p-6 select-none animate-in fade-in duration-200"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsFullscreen(false);
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Tampilan Layar Penuh"
+        >
+          {/* Top Bar Header */}
+          <div
+            className="w-full flex items-center justify-between text-white z-20 pb-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 min-w-0 pr-4">
+              <span className="text-sm sm:text-base font-semibold truncate tracking-tight text-zinc-100">
+                {photos[currentIndex]?.title || app.title}
+              </span>
+              {photos.length > 1 && (
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/15 text-zinc-200 font-medium border border-white/10 flex-shrink-0">
+                  {currentIndex + 1} / {photos.length}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsFullscreen(false);
+                }}
+                aria-label="Keluar dari Layar Penuh"
+                title="Keluar dari Layar Penuh (Esc)"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-zinc-100 text-xs font-medium transition-colors border border-white/10"
+              >
+                <Minimize2 className="w-4 h-4" />
+                <span className="hidden sm:inline">Tutup Layar Penuh</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Center Image Container with Slide Navigation */}
+          <div
+            className="relative flex-1 w-full flex items-center justify-center overflow-hidden my-auto"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            {photos.length > 1 && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev();
+                }}
+                aria-label="Foto sebelumnya"
+                className="absolute left-2 sm:left-6 z-30 p-3 sm:p-3.5 rounded-full bg-black/60 hover:bg-black/85 text-white border border-white/20 transition-all active:scale-95 shadow-xl"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            )}
+
+            <img
+              src={photos[currentIndex]?.image}
+              alt={photos[currentIndex]?.title || app.title}
+              className="max-h-[82vh] max-w-[94vw] object-contain rounded-lg shadow-2xl transition-all duration-200"
+            />
+
+            {photos.length > 1 && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext();
+                }}
+                aria-label="Foto selanjutnya"
+                className="absolute right-2 sm:right-6 z-30 p-3 sm:p-3.5 rounded-full bg-black/60 hover:bg-black/85 text-white border border-white/20 transition-all active:scale-95 shadow-xl"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            )}
+          </div>
+
+          {/* Bottom Caption & Helper */}
+          <div
+            className="w-full flex items-center justify-between text-zinc-400 text-xs pt-2 z-20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="truncate pr-4">
+              {photos[currentIndex]?.description && (
+                <span className="text-zinc-300 font-medium">
+                  {photos[currentIndex].description}
+                </span>
+              )}
+            </div>
+            <span className="hidden sm:inline-block text-[11px] text-zinc-400 flex-shrink-0">
+              Gunakan tombol panah ◀ ▶ untuk geser, Esc untuk keluar
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
