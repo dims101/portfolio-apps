@@ -140,9 +140,8 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-zinc-900/60 backdrop-blur-md transition-opacity duration-200 ${
-        isRendered && !isClosing ? 'opacity-100' : 'opacity-0'
-      }`}
+      className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-zinc-900/60 backdrop-blur-md transition-opacity duration-200 ${isRendered && !isClosing ? 'opacity-100' : 'opacity-0'
+        }`}
       onClick={handleSafeClose}
       role="dialog"
       aria-modal="true"
@@ -150,11 +149,10 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
     >
       {/* Modal Container: Fixed uniform height (h-[90vh] max-h-[820px] min-h-[580px]), light theme, zoom in/out */}
       <div
-        className={`relative bg-white/95 backdrop-blur-xl border border-zinc-200/90 text-zinc-900 rounded-2xl shadow-2xl max-w-4xl w-full h-[90vh] max-h-[820px] min-h-[580px] flex flex-col overflow-hidden transition-all duration-200 ease-out ${
-          isRendered && !isClosing
-            ? 'scale-100 opacity-100 translate-y-0'
-            : 'scale-95 opacity-0 translate-y-2'
-        }`}
+        className={`relative bg-white/95 backdrop-blur-xl border border-zinc-200/90 text-zinc-900 rounded-2xl shadow-2xl max-w-4xl w-full h-[90vh] max-h-[820px] min-h-[580px] flex flex-col overflow-hidden transition-all duration-200 ease-out ${isRendered && !isClosing
+          ? 'scale-100 opacity-100 translate-y-0'
+          : 'scale-95 opacity-0 translate-y-2'
+          }`}
         onClick={(e) => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -268,11 +266,10 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
                 <button
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all flex items-center justify-center bg-zinc-100 ${
-                    idx === currentIndex
-                      ? 'border-emerald-600 ring-2 ring-emerald-500/20 scale-105'
-                      : 'border-zinc-200 opacity-70 hover:opacity-100'
-                  }`}
+                  className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all flex items-center justify-center bg-zinc-100 ${idx === currentIndex
+                    ? 'border-emerald-600 ring-2 ring-emerald-500/20 scale-105'
+                    : 'border-zinc-200 opacity-70 hover:opacity-100'
+                    }`}
                 >
                   <img
                     src={p.image}
@@ -332,11 +329,10 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
                     <button
                       type="button"
                       onClick={() => copyToClipboard(app.demo_username!, 'user')}
-                      className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 flex-shrink-0 ${
-                        copiedUser
-                          ? 'bg-emerald-600 text-white shadow-xs'
-                          : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200'
-                      }`}
+                      className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 flex-shrink-0 ${copiedUser
+                        ? 'bg-emerald-600 text-white shadow-xs'
+                        : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200'
+                        }`}
                     >
                       {copiedUser ? (
                         <>
@@ -367,11 +363,10 @@ export const PhotoGalleryModal: FC<PhotoGalleryModalProps> = ({ app, onClose }) 
                     <button
                       type="button"
                       onClick={() => copyToClipboard(app.demo_password!, 'pass')}
-                      className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 flex-shrink-0 ${
-                        copiedPass
-                          ? 'bg-emerald-600 text-white shadow-xs'
-                          : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200'
-                      }`}
+                      className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 flex-shrink-0 ${copiedPass
+                        ? 'bg-emerald-600 text-white shadow-xs'
+                        : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200'
+                        }`}
                     >
                       {copiedPass ? (
                         <>

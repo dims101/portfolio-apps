@@ -1,0 +1,44 @@
+{
+  "title": "Hunian | Manajemen Kost PWA",
+  "description": "Project SaaS yang sedang dikembangkan untuk manajemen kost, memudahkan pemilik kos dalam mengelola kost, penagihan pembayaran bulanan otomatis via whatsapp yang terintegrasi dengan payment gateway, laporan revenue dan pembayaran kost dengan role based access control antara pemilik kos dan penjaga kos.",
+  "tech_stack": "Next.js, Supabase, Inngest, UploadThing, Duitku Payement, Clerk,",
+  "image": "/uploads/pasted-image-1789404687518.png",
+  "live_link": "https://hunian.dims-dev.my.id",
+  "login_link": "https://hunian.dims-dev.my.id/sign-in",
+  "github_link": "https://github.com/dims101/hunian_saas",
+  "demo_username": "",
+  "demo_password": "",
+  "demo_note": "Sign with Google",
+  "gallery": [
+    {
+      "image": "/uploads/pasted-image-1789404819570.png",
+      "title": "Property Management",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789404888589.png",
+      "title": "Property Management",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789404945632.png",
+      "title": "Mass Unit Assignment",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789405031137.png",
+      "title": "Generate unit with prefix",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789405125381.png",
+      "title": "Setup User",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789405240448.png",
+      "title": "Revenue Report",
+      "description": ""
+    }
+  ]
+}

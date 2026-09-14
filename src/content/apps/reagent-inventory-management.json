@@ -1,0 +1,34 @@
+{
+  "title": "Reagent Inventory Management App",
+  "description": "Sistem informasi berbasis web untuk tata kelola, pemantauan stok real-time, pelacakan lot/batch, serta peringatan tanggal kedaluwarsa (expiry control) reagen dan bahan habis pakai di laboratorium medis maupun riset.",
+  "tech_stack": "Laravel, Livewire, AlpineJS, PostgreSQL, Bootstrap UI",
+  "image": "/uploads/pasted-image-1789401166320.png",
+  "live_link": "",
+  "login_link": "",
+  "github_link": "https://github.com/dims101/reagent-management",
+  "demo_username": "",
+  "demo_password": "",
+  "demo_note": "",
+  "gallery": [
+    {
+      "image": "/uploads/pasted-image-1789401166320.png",
+      "title": "Dashboard",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789401919471.png",
+      "title": "Stock Management",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789401641722.png",
+      "title": "Role Based Access Control",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789401580159.png",
+      "title": "Task Assignment",
+      "description": ""
+    }
+  ]
+}

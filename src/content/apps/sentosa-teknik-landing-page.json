@@ -1,0 +1,29 @@
+{
+  "title": "Sentosa Teknik | Landing Page & Invoice APP",
+  "description": "Platform digital terpadu untuk unit usaha jasa servis dan perawatan AC Sentosa Teknik. Menggabungkan landing page interaktif untuk menarik pelanggan baru dengan sistem kasir/billing internal untuk input tarif layanan, pembuatan invoice multi-layanan otomatis, dan cetak faktur pengerjaan teknisi secara instan.",
+  "tech_stack": "Laravel, MySQL, Bootstrap UI",
+  "image": "/uploads/Dashboard.png",
+  "live_link": "https://sentosa.dims-dev.my.id",
+  "login_link": "https://sentosa.dims-dev.my.id/login",
+  "github_link": "https://github.com/dims101/sentosa_teknik",
+  "demo_username": "admin@gmail.com",
+  "demo_password": "password",
+  "demo_note": "",
+  "gallery": [
+    {
+      "image": "/uploads/Dashboard.png",
+      "title": "Landing Page",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789398135461.png",
+      "title": "Input Multi Service Order",
+      "description": ""
+    },
+    {
+      "image": "/uploads/Print Invoice.png",
+      "title": "Print Invoice",
+      "description": ""
+    }
+  ]
+}

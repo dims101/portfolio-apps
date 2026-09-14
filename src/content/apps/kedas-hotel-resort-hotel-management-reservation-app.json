@@ -1,0 +1,54 @@
+{
+  "title": "Kedas Hotel & Resort | Hotel Management & Reservation App",
+  "description": "Sistem manajemen dan reservasi hotel & resor terintegrasi. Menggabungkan website publik dengan mesin cek ketersediaan kamar dan booking online, modul front office/kasir untuk penerbitan invoice dan pembayaran (DP/Lunas), manajemen operasional kamar, hingga pembukuan arus kas (earning & expense) resort.",
+  "tech_stack": "Laravel, MySQL, Bootstrap, Laravel DOM PDF",
+  "image": "/uploads/pasted-image-1789399398634.png",
+  "live_link": "https://kedas.dims-dev.my.id",
+  "login_link": "https://kedas.dims-dev.my.id/login",
+  "github_link": "https://github.com/dims101/kedai_resort_main",
+  "demo_username": "admin",
+  "demo_password": "admin123",
+  "demo_note": "",
+  "gallery": [
+    {
+      "image": "/uploads/pasted-image-1789399398634.png",
+      "title": "Landing Page",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789399466149.png",
+      "title": "Customer Reservation Form",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789398857410.png",
+      "title": "Dashboard",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789399675714.png",
+      "title": "Revenue Report",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789399749720.png",
+      "title": "Discount Integration",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789399849023.png",
+      "title": "Landing Page Gallery Photo Management",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789400083013.png",
+      "title": "Room Type Management",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789400480303.png",
+      "title": "Blog Post",
+      "description": ""
+    }
+  ]
+}

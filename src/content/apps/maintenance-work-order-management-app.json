@@ -1,0 +1,44 @@
+{
+  "title": "Maintenance Work Order Management App",
+  "description": "Sistem manajemen perawatan mesin dan fasilitas untuk memonitor siklus Surat Perintah Kerja (SPK), persetujuan berjenjang supervisor, penugasan tim teknisi, jadwal preventive maintenance berkala, dan kontrol stok suku cadang secara real-time.",
+  "tech_stack": "Laravel, Livewire, AlpineJS, Bootstrap UI, PostgreSQL",
+  "image": "/uploads/pasted-image-1789402731116.png",
+  "live_link": "",
+  "login_link": "",
+  "github_link": "https://github.com/dims101/wo-maintenance",
+  "demo_username": "",
+  "demo_password": "",
+  "demo_note": "",
+  "gallery": [
+    {
+      "image": "/uploads/pasted-image-1789402731116.png",
+      "title": "Dashboard",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789402814552.png",
+      "title": "Role Based Access Control",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789403096526.png",
+      "title": "Manpower Working Hours Monitoring",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789403261210.png",
+      "title": "Sparepart Management",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789403405056.png",
+      "title": "PM & Work Order Management",
+      "description": ""
+    },
+    {
+      "image": "/uploads/pasted-image-1789403498453.png",
+      "title": "Team Assignmen",
+      "description": ""
+    }
+  ]
+}
